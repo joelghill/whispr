@@ -16,6 +16,9 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
+from whispr_app.views import StartView
+
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('', StartView.as_view(), name='start')
 ]

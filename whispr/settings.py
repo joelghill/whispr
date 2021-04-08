@@ -38,7 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'profiles',
-    'whispr_app'
+    'whispr_app',
+    'social'
 ]
 
 MIDDLEWARE = [

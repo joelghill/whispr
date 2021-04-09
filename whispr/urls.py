@@ -18,7 +18,7 @@ from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path, include
 
-from whispr_app.views import StartView
+from whispr_app.views import SignUpView, HomeView
 
 """
 Adding path('/', include('django.contrib.auth.urls')) provides the following urls:
@@ -35,7 +35,8 @@ reset/done/ [name='password_reset_complete']
 urlpatterns = [
     path('', include('django.contrib.auth.urls')),
     path('admin/', admin.site.urls),
-    path('', StartView.as_view(), name='start')
+    path('', SignUpView.as_view(), name='sign_up'),
+    path('home/', HomeView.as_view(), name='home')
 ]
 
 # Appending the static urls for dev environment

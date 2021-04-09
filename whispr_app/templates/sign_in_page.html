@@ -1,0 +1,18 @@
+<div/>
+    <h2>Login</h2>
+    <form method="POST" action="{% url 'login' %}">
+        {% csrf_token %}
+        {{ login_form }}
+        <input type="hidden" name="next" value="{% url 'home' %}">
+        <input type="submit" value="Login"/>
+    </form>
+<div/>
+
+<div/>
+    <h2>Sign Up</h2>
+    <form method="POST">
+        {% csrf_token %}
+        {{ form }}
+        <input type="submit" value="Sign Up"/>
+    </form>
+<div/>

@@ -1,5 +1,5 @@
 from typing import ContextManager
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.urls import reverse_lazy
@@ -20,6 +20,16 @@ class SignUpView(FormView):
     template_name = 'sign_in_page.html'
     form_class = UserCreationForm
     success_url = reverse_lazy('home')
+
+    def get(self, request):
+        """
+        If the user is logged in, redirect to the home page
+        """
+        if request.user.is_authenticated:
+            return redirect(reverse_lazy('home'))
+
+        # Otherwise go to sign in page
+        return super().get(request)
     
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)

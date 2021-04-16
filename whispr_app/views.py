@@ -1,3 +1,4 @@
+from django.http.response import HttpResponse
 from social.models import Post
 from typing import ContextManager
 from django.shortcuts import render, redirect
@@ -8,6 +9,7 @@ from django.views.generic.base import TemplateView
 from django.views.generic.edit import FormView
 
 from profiles.models import Profile
+from social.forms import CreatePostForm
 
 
 class SignUpView(FormView):
@@ -64,4 +66,15 @@ class HomeView(TemplateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['posts'] = Post.objects.all()
+        context['post_form'] = CreatePostForm()
         return context
+
+    def get(self, request):
+        return super().get(request)
+
+    def post(self, request):
+        create_form = CreatePostForm(data=request.POST)
+        if create_form.is_valid():
+            create_form.save()
+        
+        return redirect(reverse_lazy('home'))
